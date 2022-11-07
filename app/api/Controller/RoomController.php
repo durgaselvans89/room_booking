@@ -1,6 +1,6 @@
 <?php
 include_once ROOT_PATH."config/config.php";
-include_once ROOT_PATH."model/Room_booking.php";
+include_once ROOT_PATH."model/RoomBooking.php";
 include_once ROOT_PATH."model/Room.php";
 
 class RoomController	{
@@ -51,7 +51,7 @@ class RoomController	{
 						$room_id =  $room_id_arr[$i]['id'];
 					}
 					
-					$rmbk = new Room_booking();
+					$rmbk = new RoomBooking();
 					$request['room_id'] = 	$room_id;//print_r($request);
 					$lst = $rmbk->show($request);
 					
@@ -94,7 +94,7 @@ class RoomController	{
 	
 	public function listRoombookinghistory(){
 		try{
-			$rmbk = new Room_booking();
+			$rmbk = new RoomBooking();
 			$ret_arr = $rmbk->getBooking();
 			if(count($ret_arr)>0) {
 				$response=array('code' => 200, 'status' => 'Room booking list', 'list' => $ret_arr);
@@ -171,7 +171,7 @@ class RoomController	{
 			$insert_id=0;
 			$response = $this->validateCancellationInput($request);
 			if($response === true) {
-				$rmbk = new Room_booking();
+				$rmbk = new RoomBooking();
 				$response = $rmbk->cancelRoomBooking($request);
 				if($response === true)
 					$response=array('code' => 200, 'status' => 'Cancellation done successfully.');
